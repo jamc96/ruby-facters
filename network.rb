@@ -20,14 +20,15 @@ if Facter.value(:kernel) == 'Linux'
   end
 
     #Adding new facter
-    if is_bonding
-      Facter.add('is_bonding') do
-        confine :kernel => :linux
-        setcode { is_bonding }
-      end
-      Facter.add('bond_interface') do
-        confine :kernel => :linux
-        setcode { bond_interface }
-      end
+  if is_bonding
+    Facter.add('is_bonding') do
+      confine :kernel => :linux
+      setcode { is_bonding }
+    end
+    Facter.add('bond_interface') do
+      confine :kernel => :linux
+      setcode { bond_interface }
+    end
   end
 end
+
