@@ -5,18 +5,13 @@ Facter.add(:bond, :type => :aggregate) do
     chunk(:status) do
       bonding = {}
       status = Facter.value(:interfaces).split(',').any? { |key| key =~ /^bond(\d+)/ } ? 'true' : 'false'
-      if !status.to_s.empty?
-        bonding = {:status => status}
-      end
-      bonding
+      bonding = {:status => status} unless status.to_s.empty
     end
     chunk(:interface) do
       bonding = {}
       interface = Facter.value(:interfaces).split(',').find { |key| key =~ /^bond(\d+)/}
-      if !interface.to_s.empty?
-        bonding = {:interface => interface}
-      end
-      bonding
+      bonding = {:interface => interface} unless status.to_s.empty
     end
 
 end
+
